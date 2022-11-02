@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "27167605385",
+    "project_id": "hobbyrecommendationsystem",
+    "storage_bucket": "hobbyrecommendationsystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27167605385:android:2193aa62e3a7cdf64b3c58",
+        "android_client_info": {
+          "package_name": "com.hyunjin.hobbyrecommendationsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27167605385-5b54mca7u8s5k3dvv9kvckbem8rdpl42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hyunjin.hobbyrecommendationsystem",
+            "certificate_hash": "d4a06e5df688a3770f8e893b867f2b7e30be69c9"
+          }
+        },
+        {
+          "client_id": "27167605385-brtn7efj2s51741p2uqvqlottb3nfh05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdO3VrsTGl4iNtVMmZQ6C3PjOwNz7Yk1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27167605385-brtn7efj2s51741p2uqvqlottb3nfh05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
