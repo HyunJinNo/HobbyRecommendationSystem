@@ -20,15 +20,16 @@
 
     <EditText
         android:id="@+id/SignUpIDEditText"
-        android:layout_width="0dp"
+        android:layout_width="254dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="ID"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/CheckAvailabilityButon"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IDTextView" />
 
@@ -103,5 +104,17 @@
         android:text="Confirm your password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SignUpPasswordEditText" />
+
+    <Button
+        android:id="@+id/CheckAvailabilityButon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Check\nAvailability"
+        app:layout_constraintBottom_toBottomOf="@+id/SignUpIDEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/SignUpIDEditText"
+        app:layout_constraintTop_toTopOf="@+id/SignUpIDEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
