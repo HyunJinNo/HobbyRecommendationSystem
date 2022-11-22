@@ -57,4 +57,6 @@ dependencies {
 
     // Declare the dependency for the Cloud Firestore library
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    implementation 'com.opencsv:opencsv:5.6'
 }
