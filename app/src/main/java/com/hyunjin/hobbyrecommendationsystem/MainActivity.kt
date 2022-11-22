@@ -28,7 +28,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
             // TODO: settingsFragment
-            startActivity(Intent(this, SurveyActivity::class.java))
+            val intent = Intent(this, SurveyActivity::class.java)
+            intent.putExtra("ID", id)
+            startActivity(intent)
             true
         }
         R.id.action_logout -> {

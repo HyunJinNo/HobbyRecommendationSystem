@@ -8,21 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.hyunjin.hobbyrecommendationsystem.databinding.ActivitySurveyBinding
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
 
 class SurveyActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySurveyBinding
+    private lateinit var id: String
     private lateinit var questions: Array<String>
     private lateinit var answers: FloatArray
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySurveyBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        id = intent.getStringExtra("ID")!!
 
         val assetManager = this.assets
         val inputStream = assetManager.open("responses.csv")
@@ -37,6 +45,38 @@ class SurveyActivity : AppCompatActivity() {
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정
         val adapter = MyAdapter(questions)
         recyclerView.adapter = adapter
+
+        binding.submitButton.setOnClickListener {
+            val data = mutableMapOf<String, Any>().apply {
+                for (i in answers.indices) {
+                    put(questions[i], answers[i].toInt())
+                }
+            }
+
+            val ref = db.collection("Accounts").document(id)
+            var password = ""
+
+            ref.get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        password = document.data!!["password"] as String
+                        data.put("password", password)
+                        ref.set(data)
+                            .addOnSuccessListener {
+                                Toast.makeText(applicationContext, "Succeeded in submitting the data", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(applicationContext, "(1) Failed in submitting the data", Toast.LENGTH_SHORT).show()
+                            }
+                    } else {
+                        Toast.makeText(applicationContext, "(2) Failed in submitting the data", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(applicationContext, "(3) Failed in submitting the data", Toast.LENGTH_SHORT).show()
+                }
+            finish()
+        }
     }
 
     inner class MyAdapter(private val questions: Array<String>)

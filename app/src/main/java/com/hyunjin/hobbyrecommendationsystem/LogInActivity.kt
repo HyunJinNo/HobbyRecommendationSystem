@@ -57,4 +57,10 @@ class LogInActivity : AppCompatActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.LogInIDEditText.text.clear()
+        binding.LogInPasswordEditText.text.clear()
+    }
 }
