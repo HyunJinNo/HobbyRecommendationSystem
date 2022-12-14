@@ -35,11 +35,12 @@ class LogInActivity : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { document ->
                     if (document.exists()) {
-                        val data = document.data!!["password"]
+                        val data = document.data!!["password"] as String
                         if (password == data) {
                             Toast.makeText(applicationContext, "Succeeded in logging in", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.putExtra("ID", id)
+                            val intent = Intent(this, MainActivity::class.java).apply {
+                                putExtra("ID", id)
+                            }
                             startActivity(intent)
                         } else {
                             Toast.makeText(applicationContext, "Your password is not correct", Toast.LENGTH_SHORT).show()
