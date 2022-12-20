@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/activity_log_in.xml" value="0.24947916666666667" />
+        <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/drawable/button_design.xml" value="0.249" />
+        <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/drawable/edittext_border.xml" value="0.1" />
+        <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/activity_log_in.xml" value="0.2" />
         <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
-        <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/activity_splash.xml" value="0.1621376811594203" />
+        <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/activity_splash.xml" value="0.21119929453262787" />
         <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/activity_survey.xml" value="0.24947916666666667" />
         <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/layout/recyclerview_item.xml" value="0.264" />
         <entry key="..\:/android-sdk/AndroidStudioProjects/HobbyRecommendationSystem/app/src/main/res/menu/main_menu.xml" value="0.536" />

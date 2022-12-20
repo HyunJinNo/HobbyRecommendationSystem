@@ -87,5 +87,9 @@ class SignUpActivity : AppCompatActivity() {
                     return@addOnFailureListener
                 }
         }
+
+        binding.LogInTextView.setOnClickListener {
+            finish()
+        }
     }
 }

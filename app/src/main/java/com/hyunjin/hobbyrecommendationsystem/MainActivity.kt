@@ -40,8 +40,10 @@ class MainActivity : AppCompatActivity() {
         val reader = CSVReader(InputStreamReader(inputStream))
         questions = reader.readNext()
 
+        /*
         getAllRatings()
         recommendHobby(id)
+        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
