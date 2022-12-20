@@ -13,6 +13,8 @@ import java.util.concurrent.Callable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class RecommendationActivity : AppCompatActivity() {
     private val db = Firebase.firestore
@@ -52,14 +54,7 @@ class RecommendationActivity : AppCompatActivity() {
                     }
 
                     myRating = ratings[id]!!
-
-                    // TODO: 아래는 테스트 코드
-                    for (docId in ratings.keys) {
-                        println("docId: $docId")
-                        for (question in questions) {
-                            println("${question}: ${ratings[docId]!![question]}")
-                        }
-                    }
+                    recommendHobby()
                 }
                 .addOnFailureListener { exception ->
                     Toast.makeText(applicationContext, "get failed with $exception", Toast.LENGTH_SHORT).show()
@@ -68,26 +63,24 @@ class RecommendationActivity : AppCompatActivity() {
         }
     }
 
-    private fun recommendHobby(id: String): String {
-        /*
+    private fun recommendHobby() {
         var temp1 = 0.0
-        myRating = mutableMapOf<String, Int>().apply {
-            for (question in questions) {
-                val num = ratings[id]!![question]!!
-                put(question, num)
-                temp1 += (num * num).toDouble()
-            }
-            temp1 = sqrt(temp1)
-            remove(id)
+        for (question in questions) {
+            temp1 += myRating[question].toString().toDouble().pow(2.0)
         }
+        temp1 = sqrt(temp1)
 
+        ratings.remove(id)
+
+        // key: other user's id, value: value of cosine similarity
         val cosineSimilarities = mutableListOf<Pair<String, Double>>().apply {
             for (key in ratings.keys) {
                 var numerator = 0.0
                 var temp2 = 0.0
                 for (question in questions) {
-                    numerator += myRating[question]!! * ratings[key]!![question]!!
-                    temp2 += ratings[key]!![question]!!.toDouble().pow(2.0)
+                    val value = ratings[key]!![question].toString().toDouble()
+                    numerator += myRating[question].toString().toDouble() * value
+                    temp2 += value.pow(2.0)
                 }
                 temp2 = sqrt(temp2)
                 add(key to numerator / (temp1 * temp2))
@@ -95,10 +88,7 @@ class RecommendationActivity : AppCompatActivity() {
         }.sortedByDescending { it.second }
 
         for (x in cosineSimilarities) {
-            print("ID: ${x.first}, Value: ${x.second}")
+            println("ID: ${x.first}, Value: ${x.second}")
         }
-        */
-        // TODO
-        return ""
     }
 }
