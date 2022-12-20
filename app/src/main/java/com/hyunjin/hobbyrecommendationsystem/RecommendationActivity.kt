@@ -2,6 +2,7 @@ package com.hyunjin.hobbyrecommendationsystem
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -37,7 +38,7 @@ class RecommendationActivity : AppCompatActivity() {
         val reader = CSVReader(InputStreamReader(inputStream))
         questions = reader.readNext()
 
-        getAllRatings()
+        //getAllRatings()
     }
 
     private fun getAllRatings() {
@@ -89,6 +90,11 @@ class RecommendationActivity : AppCompatActivity() {
 
         for (x in cosineSimilarities) {
             println("ID: ${x.first}, Value: ${x.second}")
+        }
+
+        runOnUiThread {
+            binding.progressBar.visibility = View.GONE
+            binding.progressTextView.visibility = View.GONE
         }
     }
 }
