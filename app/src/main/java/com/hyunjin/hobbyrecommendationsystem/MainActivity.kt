@@ -40,10 +40,27 @@ class MainActivity : AppCompatActivity() {
         val reader = CSVReader(InputStreamReader(inputStream))
         questions = reader.readNext()
 
+        binding.logoutButton.setOnClickListener {
+            finish()
+        }
+
+        binding.surveyButton.setOnClickListener {
+            startActivity(Intent(this, SurveyActivity::class.java).apply {
+                putExtra("ID", id)
+            })
+        }
+
+        binding.recommendationButton.setOnClickListener {
+            startActivity(Intent(this, RecommendationActivity::class.java).apply {
+                putExtra("ID", id)
+            })
+        }
+
         /*
         getAllRatings()
         recommendHobby(id)
         */
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,12 +68,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    /*
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
             // TODO: settingsFragment
-            val intent = Intent(this, SurveyActivity::class.java)
-            intent.putExtra("ID", id)
-            startActivity(intent)
             true
         }
         R.id.action_logout -> {
@@ -65,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         }
         else -> super.onOptionsItemSelected(item)
     }
+    */
 
     private fun getAllRatings() {
         ratings = mutableMapOf<String, MutableMap<String, Int>>().apply {
