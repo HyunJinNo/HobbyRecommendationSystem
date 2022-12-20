@@ -9,11 +9,6 @@ import com.google.firebase.ktx.Firebase
 import com.hyunjin.hobbyrecommendationsystem.databinding.ActivityRecommendationBinding
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
-import java.time.LocalTime
-import java.util.concurrent.Callable
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.Future
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -38,7 +33,7 @@ class RecommendationActivity : AppCompatActivity() {
         val reader = CSVReader(InputStreamReader(inputStream))
         questions = reader.readNext()
 
-        //getAllRatings()
+        getAllRatings()
     }
 
     private fun getAllRatings() {
@@ -88,11 +83,131 @@ class RecommendationActivity : AppCompatActivity() {
             }
         }.sortedByDescending { it.second }
 
+        // 테스트 코드
         for (x in cosineSimilarities) {
             println("ID: ${x.first}, Value: ${x.second}")
         }
 
+        var count = 5
+        val top5: Array<String> = mutableListOf<String>().apply {
+            for (x in cosineSimilarities) {
+                add(x.first)
+                count--
+                if (count <= 0) {
+                    break
+                }
+            }
+        }.toTypedArray()
+
+        val assetManager = this.assets
+        val inputStream = assetManager.open("hobbies.csv")
+        val reader = CSVReader(InputStreamReader(inputStream))
+        val questionsOfHobbies = reader.readNext()
+        val hobbies = reader.readNext()
+        val averages: Array<Triple<String, String, Double>> = mutableListOf<Triple<String, String, Double>>().apply {
+            for (i in questionsOfHobbies.indices) {
+                var sum = 0.0
+                for (person in top5) {
+                    sum += ratings[person]!![questionsOfHobbies[i]]!!.toString().toDouble()
+                }
+                add(Triple(questionsOfHobbies[i], hobbies[i], (sum / 5.0)))
+            }
+        }.sortedByDescending { it.third }.toTypedArray()
+
         runOnUiThread {
+            binding.hobby1.apply {
+                text = averages[0].second
+                visibility = View.VISIBLE
+            }
+            binding.hobby2.apply {
+                text = averages[1].second
+                visibility = View.VISIBLE
+            }
+            binding.hobby3.apply {
+                text = averages[2].second
+                visibility = View.VISIBLE
+            }
+            binding.hobby4.apply {
+                text = averages[3].second
+                visibility = View.VISIBLE
+            }
+            binding.hobby5.apply {
+                text = averages[4].second
+                visibility = View.VISIBLE
+            }
+            binding.average1.apply {
+                text = averages[0].third.toString()
+                visibility = View.VISIBLE
+            }
+            binding.average2.apply {
+                text = averages[1].third.toString()
+                visibility = View.VISIBLE
+            }
+
+            binding.average3.apply {
+                text = averages[2].third.toString()
+                visibility = View.VISIBLE
+            }
+
+            binding.average4.apply {
+                text = averages[3].third.toString()
+                visibility = View.VISIBLE
+            }
+
+            binding.average5.apply {
+                text = averages[4].third.toString()
+                visibility = View.VISIBLE
+            }
+
+            var likeCount = 0
+            binding.preference1.apply {
+                val x = myRating[averages[0].first].toString().toInt()
+                text = x.toString()
+                visibility = View.VISIBLE
+                if (x >= 4) {
+                    likeCount++
+                }
+            }
+            binding.preference2.apply {
+                val x = myRating[averages[1].first].toString().toInt()
+                text = x.toString()
+                visibility = View.VISIBLE
+                if (x >= 4) {
+                    likeCount++
+                }
+            }
+            binding.preference3.apply {
+                val x = myRating[averages[2].first].toString().toInt()
+                text = x.toString()
+                visibility = View.VISIBLE
+                if (x >= 4) {
+                    likeCount++
+                }
+            }
+            binding.preference4.apply {
+                val x = myRating[averages[3].first].toString().toInt()
+                text = x.toString()
+                visibility = View.VISIBLE
+                if (x >= 4) {
+                    likeCount++
+                }
+            }
+            binding.preference5.apply {
+                val x = myRating[averages[4].first].toString().toInt()
+                text = x.toString()
+                visibility = View.VISIBLE
+                if (x >= 4) {
+                    likeCount++
+                }
+            }
+            binding.precisionKTextView.apply {
+                val precision = likeCount.toDouble() / 5.0
+                text = "Precision@5: $precision"
+                visibility = View.VISIBLE
+            }
+            binding.divider4.visibility = View.VISIBLE
+            binding.divider5.visibility = View.VISIBLE
+            binding.textView24.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
             binding.progressTextView.visibility = View.GONE
         }
