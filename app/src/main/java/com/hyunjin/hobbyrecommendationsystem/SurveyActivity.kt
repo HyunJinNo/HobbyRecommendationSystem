@@ -64,18 +64,21 @@ class SurveyActivity : AppCompatActivity() {
                         ref.set(data)
                             .addOnSuccessListener {
                                 Toast.makeText(applicationContext, "Succeeded in submitting the data", Toast.LENGTH_SHORT).show()
+                                finish()
                             }
                             .addOnFailureListener {
                                 Toast.makeText(applicationContext, "(1) Failed in submitting the data", Toast.LENGTH_SHORT).show()
+                                finish()
                             }
                     } else {
                         Toast.makeText(applicationContext, "(2) Failed in submitting the data", Toast.LENGTH_SHORT).show()
+                        finish()
                     }
                 }
                 .addOnFailureListener {
                     Toast.makeText(applicationContext, "(3) Failed in submitting the data", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
-            finish()
         }
     }
 
@@ -106,11 +109,13 @@ class SurveyActivity : AppCompatActivity() {
 
         // position 에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val text: String = questions.get(position)
+            val text: String = questions[position]
             holder.textView1.text = text
-            holder.ratingBar.rating = 3.0f
+            holder.ratingBar.rating = answers[position]
             holder.ratingBar.setOnRatingBarChangeListener {ratingBar, rating, fromUser ->
-                answers[position] = rating
+                if (fromUser) {
+                    answers[position] = rating
+                }
             }
         }
 

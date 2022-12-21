@@ -99,11 +99,66 @@ class RecommendationActivity : AppCompatActivity() {
             }
         }.toTypedArray()
 
-        val assetManager = this.assets
-        val inputStream = assetManager.open("hobbies.csv")
-        val reader = CSVReader(InputStreamReader(inputStream))
-        val questionsOfHobbies = reader.readNext()
-        val hobbies = reader.readNext()
+        val questionsOfHobbies = arrayOf(
+            "I'm interested in Internet",
+            "I'm interested in Theatre",
+            "I like Reading",
+            "I'm interested in History",
+            "I'm interested in Psychology",
+            "I'm interested in Politics",
+            "I'm interested in Mathematics",
+            "I'm interested in Physics",
+            "I'm interested in Biology",
+            "I'm interested in Chemistry",
+            "I'm interested in Geography",
+            "I'm interested in Foreign languages",
+            "I'm interested in Medicine",
+            "I'm interested in Law",
+            "I'm interested in Cars",
+            "I'm interested in Art exhibitions",
+            "I'm interested in Religion",
+            "I like Dancing",
+            "I like Playing musical instruments",
+            "I like Writing",
+            "I like Passive sport",
+            "I like Active sport",
+            "I like Gardening",
+            "I like Shopping",
+            "I'm interested in Science and technology",
+            "I have Fun with friends (Socializing)",
+            "I like Adrenaline sports",
+            "I like Pets"
+        )
+        val hobbies = arrayOf(
+            "Internet",
+            "Watching Movies",
+            "Reading",
+            "History",
+            "Psychology",
+            "Politics",
+            "Mathematics",
+            "Physics",
+            "Biology",
+            "Chemistry",
+            "Geography",
+            "Studying Foreign languages",
+            "Medicine",
+            "Law",
+            "Cars",
+            "Visiting Art exhibitions",
+            "Religion",
+            "Dancing",
+            "Playing musical instruments",
+            "Writing",
+            "Passive sport",
+            "Active sport",
+            "Gardening",
+            "Shopping",
+            "Studying Science and technology",
+            "Socializing",
+            "Adrenaline sports",
+            "Pets"
+        )
         val averages: Array<Triple<String, String, Double>> = mutableListOf<Triple<String, String, Double>>().apply {
             for (i in questionsOfHobbies.indices) {
                 var sum = 0.0
